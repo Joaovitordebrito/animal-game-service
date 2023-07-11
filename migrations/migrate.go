@@ -1,18 +1,15 @@
 package main
 
 import (
-	"animal-game/controllers"
 	"animal-game/initializers"
-
-	"github.com/gin-gonic/gin"
+	"animal-game/models"
 )
 
 func init() {
 	initializers.LoadEnvVariables()
 	initializers.ConnectToDB()
 }
+
 func main() {
-	r := gin.Default()
-	r.POST("/user", controllers.CreateUser)
-	r.Run()
+	initializers.DB.AutoMigrate(&models.User{})
 }
